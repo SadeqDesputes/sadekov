@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Shield, Send, Clock } from 'lucide-react';
 import { toast } from 'sonner';
 
 const forumOptions = [
@@ -45,17 +45,18 @@ export function ContactSection() {
       return;
     }
 
-    // Simulate form submission
     setIsSubmitted(true);
     toast.success('Your request has been submitted');
   };
 
   if (isSubmitted) {
     return (
-      <section id="contact" className="section-navy py-20 md:py-28">
-        <div className="container-narrow">
+      <section id="contact" className="section-navy py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
-            <CheckCircle2 className="w-16 h-16 text-beige mx-auto mb-6" />
+            <div className="w-20 h-20 rounded-full bg-beige/20 border border-beige/30 flex items-center justify-center mx-auto mb-8">
+              <CheckCircle2 className="w-10 h-10 text-beige" />
+            </div>
             <h2 className="heading-section text-primary-foreground mb-4">
               Request Received
             </h2>
@@ -69,125 +70,162 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="section-navy py-20 md:py-28">
-      <div className="container-narrow">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
+    <section id="contact" className="section-navy py-24 md:py-32 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-0 w-96 h-96 bg-beige/5 rounded-full blur-3xl -translate-y-1/2" />
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* Left - CTA Content */}
+          <div>
+            <span className="text-sm font-semibold text-beige uppercase tracking-widest mb-4 block">
+              Get Started
+            </span>
             <h2 className="heading-section text-primary-foreground mb-6">
               Before relying on a UAE forum, make sure it actually applies.
             </h2>
-            <p className="body-large text-primary-foreground/80">
+            <p className="body-large text-primary-foreground/80 mb-10">
               If you are in a dispute, facing one, or uncertain which forum governs your case, we can review the clause and the key facts and explain the options clearly.
             </p>
+            
+            {/* Trust indicators */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                <div className="w-10 h-10 rounded-lg bg-beige/10 flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-beige" />
+                </div>
+                <p className="body-small text-primary-foreground/70">
+                  Confidentiality respected
+                </p>
+              </div>
+              <div className="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                <div className="w-10 h-10 rounded-lg bg-beige/10 flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-beige" />
+                </div>
+                <p className="body-small text-primary-foreground/70">
+                  Initial information helps us assess the next step
+                </p>
+              </div>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid sm:grid-cols-2 gap-4">
+          {/* Right - Form */}
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-lg bg-beige/20 flex items-center justify-center">
+                <Send className="w-5 h-5 text-beige" />
+              </div>
+              <h3 className="font-heading text-xl font-semibold text-primary-foreground">
+                Request an Assessment
+              </h3>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-primary-foreground text-sm">
+                    Name <span className="text-beige">*</span>
+                  </Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/40 focus:border-beige focus:ring-beige/20 rounded-lg h-11"
+                    placeholder="Your name"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="company" className="text-primary-foreground text-sm">
+                    Company <span className="text-primary-foreground/50">(optional)</span>
+                  </Label>
+                  <Input
+                    id="company"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/40 focus:border-beige focus:ring-beige/20 rounded-lg h-11"
+                    placeholder="Your company"
+                  />
+                </div>
+              </div>
+
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-primary-foreground">
-                  Name <span className="text-beige">*</span>
+                <Label htmlFor="email" className="text-primary-foreground text-sm">
+                  Email <span className="text-beige">*</span>
                 </Label>
                 <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:border-beige"
-                  placeholder="Your name"
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/40 focus:border-beige focus:ring-beige/20 rounded-lg h-11"
+                  placeholder="your@email.com"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="company" className="text-primary-foreground">
-                  Company <span className="text-primary-foreground/50">(optional)</span>
+                <Label htmlFor="forum" className="text-primary-foreground text-sm">
+                  What does your contract mention? <span className="text-beige">*</span>
                 </Label>
-                <Input
-                  id="company"
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:border-beige"
-                  placeholder="Your company"
+                <Select
+                  value={formData.forum}
+                  onValueChange={(value) => setFormData({ ...formData, forum: value })}
+                >
+                  <SelectTrigger className="bg-white/10 border-white/20 text-primary-foreground focus:border-beige focus:ring-beige/20 rounded-lg h-11 [&>span]:text-primary-foreground [&>span[data-placeholder]]:text-primary-foreground/40">
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-primary border-white/20 rounded-lg">
+                    {forumOptions.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={option.value}
+                        className="text-primary-foreground focus:bg-white/10 focus:text-primary-foreground rounded-md"
+                      >
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="description" className="text-primary-foreground text-sm">
+                  Short description <span className="text-beige">*</span>
+                </Label>
+                <Textarea
+                  id="description"
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/40 focus:border-beige focus:ring-beige/20 min-h-[100px] rounded-lg"
+                  placeholder="Briefly describe your dispute or situation"
                 />
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-primary-foreground">
-                Email <span className="text-beige">*</span>
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:border-beige"
-                placeholder="your@email.com"
-              />
-            </div>
+              <div className="flex items-start gap-3 p-4 bg-white/5 rounded-lg border border-white/10">
+                <Checkbox
+                  id="disclaimer"
+                  checked={formData.disclaimer}
+                  onCheckedChange={(checked) =>
+                    setFormData({ ...formData, disclaimer: checked as boolean })
+                  }
+                  className="border-white/40 data-[state=checked]:bg-beige data-[state=checked]:border-beige mt-0.5"
+                />
+                <Label
+                  htmlFor="disclaimer"
+                  className="text-sm text-primary-foreground/70 font-normal cursor-pointer leading-relaxed"
+                >
+                  I understand this is not legal advice and does not create a lawyer-client relationship.
+                </Label>
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="forum" className="text-primary-foreground">
-                What does your contract mention? <span className="text-beige">*</span>
-              </Label>
-              <Select
-                value={formData.forum}
-                onValueChange={(value) => setFormData({ ...formData, forum: value })}
-              >
-                <SelectTrigger className="bg-white/10 border-white/20 text-primary-foreground focus:border-beige [&>span]:text-primary-foreground [&>span[data-placeholder]]:text-primary-foreground/50">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent className="bg-primary border-white/20">
-                  {forumOptions.map((option) => (
-                    <SelectItem
-                      key={option.value}
-                      value={option.value}
-                      className="text-primary-foreground focus:bg-white/10 focus:text-primary-foreground"
-                    >
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="description" className="text-primary-foreground">
-                Short description <span className="text-beige">*</span>
-              </Label>
-              <Textarea
-                id="description"
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:border-beige min-h-[120px]"
-                placeholder="Briefly describe your dispute or situation"
-              />
-            </div>
-
-            <div className="flex items-start gap-3">
-              <Checkbox
-                id="disclaimer"
-                checked={formData.disclaimer}
-                onCheckedChange={(checked) =>
-                  setFormData({ ...formData, disclaimer: checked as boolean })
-                }
-                className="border-white/40 data-[state=checked]:bg-beige data-[state=checked]:border-beige mt-0.5"
-              />
-              <Label
-                htmlFor="disclaimer"
-                className="text-sm text-primary-foreground/70 font-normal cursor-pointer"
-              >
-                I understand this is not legal advice and does not create a lawyer-client relationship.
-              </Label>
-            </div>
-
-            <Button variant="hero" size="xl" type="submit" className="w-full">
-              Request an initial forum assessment
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-
-            <p className="body-small text-primary-foreground/50 text-center">
-              Confidentiality respected. Initial information helps us assess the next step.
-            </p>
-          </form>
+              <Button variant="hero" size="xl" type="submit" className="w-full group">
+                Request an initial forum assessment
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
