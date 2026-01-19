@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import logo from '@/assets/logo.png';
 
 const navLinks = [
   { label: 'Why It Matters', href: '#why-forum-matters' },
@@ -34,33 +35,37 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-primary shadow-lg py-3'
-          : 'bg-primary/95 py-4'
+          ? 'bg-primary/98 backdrop-blur-sm shadow-xl py-3'
+          : 'bg-transparent py-5'
       }`}
     >
-      <div className="container-narrow flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center">
-          <span className="font-heading text-xl md:text-2xl font-semibold text-primary-foreground tracking-tight">
-            Sadekov Law Firm
-          </span>
+          <img 
+            src={logo} 
+            alt="Sadekov Law Firm" 
+            className="h-10 md:h-12 w-auto"
+          />
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-10">
           {navLinks.map((link) => (
             <button
               key={link.href}
               onClick={() => scrollToSection(link.href)}
-              className="font-body text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200"
+              className="font-body text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-200 relative group"
             >
               {link.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-beige transition-all duration-200 group-hover:w-full" />
             </button>
           ))}
           <Button
             variant="hero"
             size="sm"
             onClick={() => scrollToSection('#contact')}
+            className="ml-4"
           >
             Request Assessment
           </Button>
@@ -68,7 +73,7 @@ export function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden p-2 text-primary-foreground"
+          className="lg:hidden p-2 text-primary-foreground hover:bg-white/10 rounded-lg transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -78,20 +83,20 @@ export function Header() {
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-primary border-t border-white/10">
-          <nav className="container-narrow py-4 flex flex-col gap-4">
+        <div className="lg:hidden bg-primary/98 backdrop-blur-sm border-t border-white/10 animate-in slide-in-from-top-2 duration-200">
+          <nav className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-1">
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="font-body text-base text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200 text-left py-2"
+                className="font-body text-base text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/5 transition-colors duration-200 text-left py-3 px-4 rounded-lg"
               >
                 {link.label}
               </button>
             ))}
             <Button
               variant="hero"
-              className="mt-2 w-full"
+              className="mt-4 w-full"
               onClick={() => scrollToSection('#contact')}
             >
               Request Assessment
