@@ -45,7 +45,7 @@ export function HeroSection() {
 
             {/* Headline */}
             <h1 className="heading-hero text-primary-foreground mb-6">
-              Before you file or respond, confirm the right forum actually applies.
+              Before you file or respond, confirm the right forum actually applies!
             </h1>
 
             {/* Subheading */}
