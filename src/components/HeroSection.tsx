@@ -2,6 +2,9 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Shield, Target } from 'lucide-react';
 import { HeroBackground } from './icons/HeroBackground';
 import { ForumIllustration } from './icons/ForumIllustration';
+import dubaiHero from '@/assets/Dubai.jpg';
+
+const USE_HERO_IMAGE = false;
 
 const bullets = [
   {
@@ -78,9 +81,33 @@ export function HeroSection() {
           </div>
 
           {/* Right Column - Illustration */}
-          <div className="hidden lg:flex items-center justify-center">
-            <ForumIllustration className="w-full max-w-md" />
-          </div>
+          {USE_HERO_IMAGE ? (
+            <div className="flex items-center justify-center mt-10 lg:mt-0">
+              <div
+                className="w-full max-w-sm sm:max-w-md lg:max-w-lg"
+                style={{
+                  WebkitMaskImage:
+                    'radial-gradient(closest-side, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%)',
+                  maskImage:
+                    'radial-gradient(closest-side, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%)',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskSize: '100% 100%',
+                  maskSize: '100% 100%',
+                }}
+              >
+                <img
+                  src={dubaiHero}
+                  alt="Dubai skyline"
+                  className="w-full max-h-[320px] sm:max-h-[360px] lg:max-h-[420px] object-contain"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="hidden lg:flex items-center justify-center">
+              <ForumIllustration className="w-full max-w-md" />
+            </div>
+          )}
         </div>
       </div>
       
