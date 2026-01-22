@@ -1,10 +1,10 @@
-import logo from '@/assets/logo.png';
+import logo from '@/assets/Sadeg_logo_tr.png';
 export function Footer() {
   return <footer className="bg-primary border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col items-center md:items-start gap-4">
-            <img alt="Sadekov Law Firm" className="h-8 w-auto opacity-80" src="/lovable-uploads/aa630135-72a7-4f5e-b74c-a36a59181e37.png" />
+            <img alt="Sadekov Law Firm" className="h-8 w-auto opacity-80" src={logo} />
             <p className="body-small text-primary-foreground/50">
               Disputes | Cross-border enforcement | Forum assessment
             </p>

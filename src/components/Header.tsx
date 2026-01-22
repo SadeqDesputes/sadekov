@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import logo from '@/assets/logo.png';
+import logo from '@/assets/Sadeg_logo_tr.png';
 const navLinks = [{
   label: 'Why It Matters',
   href: '#why-forum-matters'
@@ -41,7 +41,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center">
-          <img alt="Sadekov Law Firm" className="h-10 md:h-12 w-auto" src="/lovable-uploads/854864f8-d117-4919-9035-5e0b5e47ebe8.png" />
+          <img alt="Sadekov Law Firm" className="h-10 md:h-12 w-auto" src={logo} />
         </a>
 
         {/* Desktop Navigation */}
