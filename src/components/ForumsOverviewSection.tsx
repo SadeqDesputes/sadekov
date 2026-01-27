@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Building2, Landmark, Scale, Info, ChevronRight } from 'lucide-react';
 import {
   Dialog,
@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
-type ForumKey = 'difc' | 'adgm' | 'arbitration';
+type ForumKey = 'difc' | 'adgm' | 'arbitration_diac' | 'arbitration_icc';
 
 interface ForumData {
   name: string;
@@ -27,152 +27,307 @@ interface ForumModalContent {
   whyChosen: string[];
   pitfalls: string[];
   whatWeAssess: string[];
+  whenAppliesSecondary?: string[];
+  whenAppliesIntro?: string;
+  whenAppliesSecondaryIntro?: string;
+  whenAppliesOutro?: string;
+  whenAppliesCallout?: boolean;
+  whyChosenParagraphs?: string[];
+  whyChosenIntro?: string;
+  pitfallsParagraphs?: string[];
+  pitfallsOutro?: string;
+  whatWeAssessIntro?: string;
+  whatWeAssessOutro?: string;
+  whatWeAssessParagraphs?: string[];
+  leadParagraphs?: string[];
+  sectionLabels?: {
+    whatItIs?: string;
+    whenApplies?: string;
+    whyChosen?: string;
+    pitfalls?: string;
+    whatWeAssess?: string;
+  };
+  additionalSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  additionalSectionCallout?: boolean;
+  additionalSectionPosition?: 'before' | 'after';
+  pitfallsAfterWhatWeAssess?: boolean;
+  disclaimer?: string;
 }
 
 const forums: Record<ForumKey, ForumData> = {
   difc: {
     name: "DIFC Courts",
     icon: Building2,
-    whatItIs: "An English-language common law court system based in the Dubai International Financial Centre (DIFC).",
+    whatItIs: "The Dubai International Financial Centre (DIFC) offers a globally recognised, English-language common-law forum for resolving international commercial disputes. We represent clients in DIFC-related arbitration and court matters across contractual, corporate, banking, employment, and cross-border disputes. DIFC arbitration allows parties to appoint international or local counsel of their choice, providing flexibility and neutrality. Where court proceedings are required, representation before the DIFC Courts is conducted in accordance with DIFC practitioner registration requirements.",
     whenItApplies: "It may apply when contracts choose DIFC Courts, when relevant DIFC connections exist, or where specific jurisdictional gateways are met.",
     whyChosen: "Chosen for procedural clarity, international familiarity, and disputes with cross-border elements.",
   },
   adgm: {
     name: "ADGM Courts",
     icon: Landmark,
-    whatItIs: "An English-language common law court system based in Abu Dhabi Global Market (ADGM).",
+    whatItIs: "Abu Dhabi Global Market (ADGM) is a leading common-law financial free zone with its own independent court system and arbitration framework. We represent clients in ADGM-related arbitration and court proceedings under a legal system based on the common law of England and Wales. ADGM Courts operate in English and apply English case law and selected statutes directly, offering a familiar forum for international disputes. International lawyers with sufficient experience may appear before ADGM Courts, allowing flexible and cross-border representation.",
     whenItApplies: "It may apply where contracts choose ADGM Courts, where ADGM links exist, or where jurisdiction requirements are satisfied.",
     whyChosen: "Chosen for modern common law framework and strong fit for complex commercial disputes.",
   },
-  arbitration: {
-    name: "Arbitration (DIAC / ICC)",
+  arbitration_diac: {
+    name: "Arbitration (DIAC)",
     icon: Scale,
-    whatItIs: "A private dispute resolution process that depends on a valid arbitration agreement.",
+    whatItIs: "The Dubai International Arbitration Centre (DIAC) is Dubai's principal arbitration institution and a leading dispute resolution forum in the Middle East. We represent clients in DIAC-administered arbitrations across construction, energy, finance, real estate, logistics, and complex commercial disputes. DIAC arbitrations are conducted under modern rules aligned with international best practices and the UNCITRAL Model Law. Parties are free to appoint international or local counsel, with no local bar licence required to act in the arbitration itself.",
+    whenItApplies: "It applies only where a valid arbitration clause exists (or parties agree later), and the clause scope covers the dispute.",
+    whyChosen: "Chosen for confidentiality, flexibility, and enforceability strategies in international matters.",
+  },
+  arbitration_icc: {
+    name: "Arbitration (ICC)",
+    icon: Scale,
+    whatItIs: "The International Court of Arbitration of the International Chamber of Commerce (ICC) is the world's leading institution for resolving international commercial disputes. Established in 1923, ICC arbitration is widely used for complex, high-value cross-border matters. We represent clients in ICC-administered arbitrations across multiple industries and jurisdictions. ICC arbitration allows parties to appoint counsel of their choice, with no institutional licensing or bar admission requirements imposed by the ICC itself.",
     whenItApplies: "It applies only where a valid arbitration clause exists (or parties agree later), and the clause scope covers the dispute.",
     whyChosen: "Chosen for confidentiality, flexibility, and enforceability strategies in international matters.",
   },
 };
-
 const modalContent: Record<ForumKey, ForumModalContent> = {
   difc: {
     title: "DIFC Courts",
-    summary: "A standalone common law court system in Dubai, operating in English and applying English-based law.",
+    summary: "Before relying on DIFC jurisdiction, make sure it actually applies.",
+    leadParagraphs: [
+      "Jurisdiction in the DIFC is not automatic and should never be taken for granted. Whether your contract refers to DIFC Courts, your business operates within the DIFC, or a dispute involves cross-border elements linked to the UAE, a precise jurisdictional assessment is essential.",
+      "Whether you are considering initiating proceedings before the DIFC Courts, have already encountered a DIFC-related dispute, or are unsure whether DIFC is the right forum for your case, jurisdiction should never be assumed.",
+      "We assist clients in verifying whether DIFC Courts have jurisdiction, assessing procedural and strategic risks, and determining the most effective course of action at an early stage. Where jurisdiction is properly established, DIFC Court judgments may be recognised and enforced not only in Dubai or the UAE, but internationally, through applicable conventions or local recognition mechanisms in the relevant jurisdiction. Early, precise analysis ensures that your dispute strategy is legally sound, enforceable, and commercially effective.",
+      "We help clients verify whether DIFC Courts have jurisdiction, identify potential procedural risks, and structure a legally sound strategy before any claim is filed or defended. This early clarity allows our clients to avoid costly mistakes and proceed with confidence in complex DIFC-related disputes."
+    ],
     whatItIs: [
-      "The DIFC Courts are a judicial system located within the Dubai International Financial Centre, a financial free zone in Dubai, UAE. They operate independently from the Dubai Courts and apply common law principles derived from English law.",
-      "Proceedings are conducted entirely in English, with judges drawn from leading common law jurisdictions including England, Singapore, and Australia. The courts handle civil and commercial disputes.",
-      "The DIFC Courts have their own rules of procedure, enforcement mechanisms, and appellate structure. They are not part of the UAE's federal or local court systems."
+      "The DIFC is a financial free zone in Dubai with its own independent common-law judicial system, separate from the UAEâ€™s onshore civil courts. DIFC Courts operate in English and are designed to meet the expectations of international businesses and investors."
     ],
+    whenAppliesIntro: "The DIFC Courts consist of:",
     whenApplies: [
-      "Contracts explicitly select DIFC Courts as the exclusive or non-exclusive jurisdiction",
-      "One or more parties are registered or licensed in the DIFC",
-      "The dispute relates to a transaction or relationship within the DIFC",
-      "Parties 'opt in' to DIFC jurisdiction through a valid jurisdiction clause",
-      "Specific 'gateway' conditions are met under DIFC Court rules"
+      "Court of First Instance, which hears civil and commercial disputes at first instance",
+      "Court of Appeal, which hears appeals and interprets DIFC laws and regulations",
+      "Small Claims Tribunal, designed for lower-value disputes and simplified procedures"
     ],
-    whyChosen: [
-      "English-language proceedings and common law principles familiar to international parties",
-      "Experienced judges from major common law jurisdictions",
-      "Clear procedural rules and efficient case management",
-      "Strong enforcement mechanisms within the UAE and internationally",
-      "Suitable for cross-border commercial and financial disputes"
+    whenAppliesSecondaryIntro: "The Court of First Instance generally has jurisdiction where:",
+    whenAppliesSecondary: [
+      "Parties have expressly opted into DIFC Courts in their contract",
+      "The dispute involves a DIFC-established entity",
+      "The dispute arises out of activities conducted within the DIFC"
     ],
-    pitfalls: [
-      "Assuming DIFC Courts apply simply because a party does business in the UAE",
-      "Confusing DIFC Courts with onshore Dubai Courts (they are separate systems)",
-      "Believing a DIFC Courts clause is valid without checking if the contract was properly executed",
-      "Overlooking that DIFC judgments may still require recognition steps outside the DIFC",
-      "Filing claims without confirming the jurisdictional gateway actually applies"
+    whenAppliesOutro: "Parties are free to choose the governing law of their contract. If no governing law is specified, DIFC law applies by default.",
+    whyChosen: [],
+    whyChosenParagraphs: [
+      "DIFC-seated arbitration is designed to be efficient, flexible, and business-focused. Parties typically agree on arbitration rules in advance and retain significant control over procedure, timelines, and tribunal composition. Arbitration awards are generally final, with limited grounds for challenge, allowing for faster resolution and enforcement."
+    ],
+    pitfalls: [],
+    pitfallsParagraphs: [
+      "In DIFC arbitration, parties may appoint any lawyer, whether local or international, as arbitration counsel. However, appearances before the DIFC Courts, including enforcement, interim relief, or related court proceedings, require lawyers to be registered on the DIFC Courtsâ€™ Register of Legal Practitioners."
     ],
     whatWeAssess: [
-      "Whether the contract contains a valid DIFC Courts jurisdiction clause",
-      "Whether the clause is exclusive, non-exclusive, or asymmetric",
-      "The governing law of the contract and its relationship to DIFC law",
-      "Whether jurisdictional gateways under DIFC rules are satisfied",
-      "The location of the counterparty and key assets for enforcement purposes",
-      "Potential challenges to jurisdiction and how to address them"
-    ]
+      "Select arbitrators",
+      "Define procedural timelines",
+      "Determine document disclosure processes",
+      "Choose applicable arbitration rules"
+    ],
+    whatWeAssessIntro: "Parties in DIFC arbitration have wide discretion to:",
+    whatWeAssessOutro: "This flexibility allows disputes to be resolved in a manner aligned with commercial realities rather than rigid court procedures.",
+    additionalSection: {
+      title: "Confidentiality and Privacy",
+      paragraphs: [
+        "DIFC arbitration proceedings are private and confidential, making them particularly attractive for sensitive commercial and financial disputes. This confidentiality is a key reason why multinational companies frequently choose DIFC-based dispute resolution."
+      ]
+    },
+    additionalSectionCallout: true,
+    additionalSectionPosition: 'before',
+    sectionLabels: {
+      whatItIs: "What is the DIFC?",
+      whenApplies: "Jurisdiction and Court Structure",
+      whyChosen: "DIFC Arbitration",
+      pitfalls: "Legal Representation",
+      whatWeAssess: "Procedural Flexibility"
+    },
+    disclaimer: "Sadekov Law Office is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters under Estonian and EU law."
   },
   adgm: {
     title: "ADGM Courts",
-    summary: "A modern common law court system in Abu Dhabi, designed for international commercial disputes.",
+    summary: "Why ADGM jurisdiction may matter for your business.",
+    leadParagraphs: [
+      "If your transaction, corporate structure, or dispute has a connection to the Abu Dhabi Global Market, the choice of ADGM jurisdiction can have a decisive impact on how your rights are protected and enforced. ADGM offers a common law framework, an independent court system, and procedures designed for complex cross-border matters. For businesses operating in or through the UAE, selecting or properly assessing ADGM jurisdiction can mean greater predictability, procedural clarity, and internationally enforceable outcomes. Understanding whether ADGM law and courts apply to your situation is not a formality; it is a strategic decision that directly affects risk, timing, and results."
+    ],
     whatItIs: [
-      "The ADGM Courts operate within Abu Dhabi Global Market, a financial free zone on Al Maryah Island in Abu Dhabi. Like the DIFC Courts, they are a standalone common law system, independent from the Abu Dhabi and UAE federal courts.",
-      "The ADGM Courts apply English common law as it stood in 2015, supplemented by ADGM regulations. Proceedings are in English, and the judiciary includes experienced common law judges.",
-      "The court structure includes a Court of First Instance and a Court of Appeal, with clear procedural rules modeled on best practices from leading commercial courts."
+      "Abu Dhabi Global Market (ADGM) is an international financial free zone with a fully independent legal and judicial system, separate from the UAE federal and emirate-level courts. Its legal framework is expressly based on the common law of England and Wales, providing certainty and predictability for international businesses."
     ],
+    whenAppliesIntro: "ADGM applies:",
+    whenAppliesCallout: true,
     whenApplies: [
-      "Contracts specify ADGM Courts as the chosen jurisdiction",
-      "One or more parties are registered or licensed in ADGM",
-      "The dispute arises out of operations or activities connected to ADGM",
-      "Parties agree to submit an existing dispute to ADGM jurisdiction",
-      "Specific jurisdictional requirements under ADGM regulations are met"
+      "English common law principles",
+      "English case law directly",
+      "Selected English statutes as part of its legal framework"
     ],
+    whenAppliesOutro: "Proceedings before ADGM Courts are conducted entirely in English, and judgments are published in English. Court procedures closely follow the English Civil Procedure Rules (CPR), ensuring a familiar and transparent litigation process for international parties.",
     whyChosen: [
-      "English-language common law system with modern procedural rules",
-      "Judges with significant commercial litigation experience",
-      "Well-suited for complex financial, corporate, and commercial disputes",
-      "Clear framework for enforcement of judgments within the UAE",
-      "Growing body of case law addressing international commercial issues"
+      "Court of First Instance",
+      "Court of Appeal"
+    ],
+    whyChosenIntro: "The ADGM Courts consist of:",
+    whyChosenParagraphs: [
+      "The Court of First Instance, which includes three divisions, is the designated court for all arbitration-related matters in the ADGM, including enforcement, interim measures, and challenges to arbitral awards.",
+      "The Court of Appeal (consisting of three judges) has exclusive competence to hear and settle appeals against judgments or orders issued by the Court of First Instance."
     ],
     pitfalls: [
-      "Assuming ADGM Courts have jurisdiction simply because of an Abu Dhabi connection",
-      "Confusing ADGM Courts with onshore Abu Dhabi Courts (they are different systems)",
-      "Relying on informal references to ADGM without a properly drafted clause",
-      "Failing to verify whether the ADGM Courts clause covers the specific type of dispute",
-      "Overlooking enforcement considerations in other UAE emirates or abroad"
+      "Full alignment with the UNCITRAL Model Law, including grounds for setting aside arbitral awards",
+      "Provisions distinguishing ADGM law from the DIFC framework",
+      "Additional rules governing the proper conduct of parties and their representatives during arbitration proceedings"
+    ],
+    pitfallsParagraphs: [
+      "In addition to its court system, ADGM has adopted Arbitration Regulations based on the UNCITRAL Model Law, making it an attractive seat for international arbitration. Parties may choose ADGM as the seat of arbitration regardless of where the underlying dispute arises.",
+      "Key features of the ADGM Arbitration Regulations include:"
     ],
     whatWeAssess: [
-      "Whether a valid ADGM Courts jurisdiction clause exists",
-      "The scope of the clause (what types of disputes are covered)",
-      "Governing law and its interaction with ADGM's legal framework",
-      "Whether any party or asset connection to ADGM supports jurisdiction",
-      "Practical enforcement routes for any judgment obtained",
-      "Strategic considerations if multiple forums could potentially apply"
-    ]
+      "UAE federal courts",
+      "Abu Dhabi courts",
+      "Ras Al Khaimah courts"
+    ],
+    whatWeAssessIntro: "ADGM court judgments benefit from a broader and more streamlined recognition regime within the UAE. ADGM judgments may be recognised under simplified procedures in:",
+    whatWeAssessOutro: "This provides a faster mechanism for enforcing court orders, including interim measures in support of arbitration, compared to other free-zone courts.",
+    additionalSection: {
+      title: "Representation Before ADGM Courts",
+      paragraphs: [
+        "Proceedings before ADGM Courts are designed to be efficient and accessible. Any lawyer from any jurisdiction with at least five years of continuous legal experience may appear before ADGM Courts, including in arbitration-related court proceedings. This flexibility allows parties to be represented by trusted counsel from their home jurisdictions while benefiting from ADGMâ€™s common-law framework."
+      ]
+    },
+    additionalSectionCallout: true,
+    additionalSectionPosition: 'after',
+    sectionLabels: {
+      whatItIs: "What is ADGM?",
+      whenApplies: "Legal System and Court Procedure",
+      whyChosen: "Structure of the ADGM Courts",
+      pitfalls: "ADGM Arbitration Framework",
+      whatWeAssess: "Recognition and Enforcement Advantages"
+    },
+    disclaimer: "Sadekov Law Office is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters."
   },
-  arbitration: {
-    title: "Arbitration (DIAC / ICC)",
-    summary: "Private dispute resolution through arbitration, commonly administered under DIAC or ICC rules.",
+  arbitration_diac: {
+    title: "Arbitration (DIAC)",
+    summary: "Before relying on DIAC arbitration, make sure it actually applies.",
+    leadParagraphs: [
+      "Whether you are considering commencing arbitration under the DIAC Rules, have already encountered a dispute involving a DIAC clause, or are unsure whether arbitration is available in your case, the existence and scope of the arbitration agreement must be verified first. We assist clients in confirming whether DIAC arbitration is validly triggered, assessing procedural and strategic risks, and structuring an effective dispute strategy at an early stage. Where a valid DIAC arbitration agreement exists, arbitral awards may be recognised and enforced internationally under the New York Convention, through local recognition procedures in the jurisdiction where the counterparty’s assets are located. Early legal clarity ensures enforceability, efficiency, and control over cross-border disputes."
+    ],
     whatItIs: [
-      "Arbitration is a private method of resolving disputes outside the courts. Parties agree in advance (usually in their contract) to submit disputes to one or more arbitrators, whose decision is binding and enforceable.",
-      "DIAC (Dubai International Arbitration Centre) is a regional arbitration institution based in Dubai. ICC (International Chamber of Commerce) is a global arbitration institution headquartered in Paris. Both provide procedural rules and administrative support for arbitrations.",
-      "The choice between DIAC, ICC, or other rules affects procedural aspects, costs, and institutional support, but the fundamental mechanism remains the same: a private, binding decision by arbitrators chosen by or for the parties."
+      "The Dubai International Arbitration Centre (DIAC) is an independent, neutral arbitration institution that administers both domestic and international commercial arbitrations. Following its restructuring, DIAC has been established as the primary arbitration forum in Dubai, serving parties from across the Middle East and beyond."
     ],
+    whenAppliesIntro: "DIAC administers arbitrations across a broad range of industries, including:",
     whenApplies: [
-      "The contract contains a valid arbitration clause specifying arbitration as the dispute resolution method",
-      "The arbitration clause covers the type of dispute that has arisen",
-      "The parties subsequently agree to arbitrate an existing dispute",
-      "The seat (legal place) of arbitration and applicable rules are clearly identified",
-      "No valid grounds exist to challenge the arbitration clause itself"
+      "Construction and infrastructure",
+      "Energy and natural resources",
+      "Banking and finance",
+      "Real estate and development",
+      "Logistics and transportation",
+      "General commercial and cross-border disputes"
     ],
+    whenAppliesOutro: "DIAC arbitrations are suitable for high-value, technically complex, and multi-party disputes.",
+    whyChosenIntro: "Proceedings are conducted under the DIAC Arbitration Rules, which provide a comprehensive procedural framework governing:",
     whyChosen: [
-      "Confidentiality: arbitration proceedings are typically private",
-      "Flexibility: parties can choose arbitrators, language, seat, and procedural rules",
-      "Neutrality: disputes can be resolved outside either party's home court system",
-      "Enforceability: arbitral awards are widely enforceable under the New York Convention",
-      "Expertise: arbitrators can be selected for relevant industry or legal knowledge"
+      "Commencement of arbitration",
+      "Appointment and challenge of arbitrators",
+      "Case management and timelines",
+      "Emergency arbitration and interim measures",
+      "Costs and fees",
+      "Issuance of final awards"
+    ],
+    whyChosenParagraphs: [
+      "The Rules are designed to align with international arbitration standards and reflect principles found in the UNCITRAL Model Law, ensuring predictability and enforceability."
     ],
     pitfalls: [
-      "Assuming arbitration applies when there is no valid arbitration clause",
-      "Confusing ICC (the institution) with a specific location — ICC arbitrations can be seated anywhere",
-      "Failing to check whether the arbitration clause actually covers the dispute at hand",
-      "Ignoring the distinction between the seat of arbitration and the venue of hearings",
-      "Underestimating the importance of the seat for procedural law and enforcement"
+      "Administers the arbitration process",
+      "Confirm or appoint arbitrators where necessary",
+      "Oversee procedural compliance",
+      "Manage arbitration costs and deposits",
+      "Provide institutional supervision and administrative support"
     ],
-    whatWeAssess: [
-      "Whether a valid and enforceable arbitration agreement exists",
-      "Which institution's rules apply (DIAC, ICC, or others)",
-      "The seat of arbitration and its legal implications",
-      "Whether the arbitration clause covers the specific claims in dispute",
-      "Enforcement routes for any award, including relevant treaties",
-      "Practical considerations such as language, number of arbitrators, and timelines"
-    ]
+    pitfallsParagraphs: [
+      "DIAC role is to:"
+    ],
+    pitfallsOutro: "The arbitral tribunal remains fully independent and responsible for deciding the merits of the dispute.",
+    whatWeAssess: [],
+    whatWeAssessParagraphs: [
+      "There is no special licensing or bar admission requirement to act as counsel in DIAC arbitration proceedings. Parties may freely appoint international or local lawyers of their choosing, reflecting the principle of party autonomy and international arbitration practice.",
+      "Where court involvement is required — such as interim measures or enforcement of an award — representation must comply with the requirements of the relevant supervising court, depending on the seat of arbitration."
+    ],
+    additionalSection: {
+      title: "Neutrality and Efficiency",
+      paragraphs: [
+        "DIAC operates as a neutral and independent institution, ensuring procedural fairness, confidentiality, and efficiency. Its rules allow parties and tribunals to tailor procedures to the needs of the dispute, making DIAC a business-friendly forum for dispute resolution."
+      ]
+    },
+    additionalSectionCallout: false,
+    additionalSectionPosition: 'after',
+    sectionLabels: {
+      whatItIs: "What is DIAC?",
+      whenApplies: "Scope of Disputes",
+      whyChosen: "DIAC Arbitration Rules",
+      pitfalls: "Role of DIAC",
+      whatWeAssess: "Legal Representation"
+    },
+    disclaimer: "Sadekov Law Office is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters under Estonian and EU law."
+  },
+  arbitration_icc: {
+    title: "Arbitration (ICC)",
+    summary: "Why ICC arbitration in the UAE may be the right choice for you.",
+    leadParagraphs: [
+      "If your contract involves international counterparties, cross-border investments, or assets located in multiple jurisdictions, ICC arbitration seated in the UAE can offer a strategically neutral and enforceable dispute resolution framework. Choosing International Chamber of Commerce arbitration allows parties to avoid national courts, rely on a globally respected arbitral process, and secure awards that may be recognised and enforced worldwide under the New York Convention. When structured correctly, an ICC arbitration seated in Dubai, DIFC, or ADGM combines international neutrality with procedural efficiency and strong enforcement prospects, making it a practical solution for complex, high-value disputes where predictability and global reach matter."
+    ],
+    whatItIs: [
+      "The International Court of Arbitration is the flagship dispute resolution body of the International Chamber of Commerce (ICC). Although referred to as a ‘court,’ it does not decide disputes itself. Instead, it administers arbitration proceedings under the ICC Rules of Arbitration, ensuring that each arbitration is conducted efficiently, neutrally, and in accordance with international standards.",
+      "The ICC Court is composed of members from jurisdictions around the world, reinforcing its global neutrality and credibility."
+    ],
+    whenAppliesIntro: "When an ICC arbitration is commenced, the ICC Secretariat manages and supervises the day-to-day administration of the case. The ICC Court exercises oversight and decision-making authority on key procedural and administrative matters to safeguard the integrity of the arbitration process.",
+    whenApplies: [],
+    whyChosenIntro: "The ICC Court’s responsibilities include:",
+    whyChosen: [
+      "Fixing the place (seat) of arbitration where parties have not agreed",
+      "Assessing the existence of a prima facie ICC arbitration agreement",
+      "Making decisions in complex multi-party or multi-contract arbitrations",
+      "Confirming, appointing, and replacing arbitrators",
+      "Deciding on challenges to arbitrators",
+      "Monitoring the progress of the arbitral proceedings",
+      "Scrutinising and approving all arbitral awards before issuance",
+      "Setting, managing, and adjusting arbitration costs and fees",
+      "Overseeing emergency arbitrator proceedings"
+    ],
+    whyChosenParagraphs: [
+      "While the ICC Court supervises the process, the arbitral tribunal alone decides the merits of the dispute."
+    ],
+    whatWeAssess: [],
+    whatWeAssessParagraphs: [
+      "ICC arbitrations are conducted under the ICC Rules of Arbitration, which provide a comprehensive and flexible procedural framework. The Rules are recognised globally for balancing party autonomy with institutional oversight and are regularly updated to reflect developments in international arbitration practice."
+    ],
+    pitfalls: [],
+    pitfallsParagraphs: [
+      "There is no separate licensing or bar admission requirement imposed by the ICC for counsel to act in an ICC arbitration. Parties may appoint any lawyer or qualified legal representative, regardless of jurisdiction, provided they are authorised to act on the party’s behalf.",
+      "Where court proceedings are required, such as interim measures, enforcement, or annulment, representation must comply with the rules of the courts at the seat of arbitration or where enforcement is sought."
+    ],
+    additionalSection: {
+      title: "Global Reach and Enforceability",
+      paragraphs: [
+        "ICC arbitral awards are enforceable in over 170 jurisdictions worldwide under the New York Convention, making ICC arbitration one of the most effective mechanisms for resolving international commercial disputes."
+      ]
+    },
+    additionalSectionCallout: false,
+    additionalSectionPosition: 'after',
+    pitfallsAfterWhatWeAssess: true,
+    sectionLabels: {
+      whatItIs: "What is the ICC Court of Arbitration?",
+      whenApplies: "Role of the ICC Court and Secretariat",
+      whyChosen: "Key Functions of the ICC Court",
+      pitfalls: "Legal Representation",
+      whatWeAssess: "ICC Arbitration Rules"
+    },
+    disclaimer: "Sadekov Law Office is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters under Estonian and EU law."
   }
 };
 
 export function ForumsOverviewSection() {
   const [openModal, setOpenModal] = useState<ForumKey | null>(null);
-  const forumKeys: ForumKey[] = ['difc', 'adgm', 'arbitration'];
+  const forumKeys: ForumKey[] = ['difc', 'adgm', 'arbitration_diac', 'arbitration_icc'];
 
   return (
     <section id="forums-overview" className="bg-muted py-24 md:py-32">
@@ -186,7 +341,7 @@ export function ForumsOverviewSection() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {forumKeys.map((key) => {
             const forum = forums[key];
             return (
@@ -210,7 +365,7 @@ export function ForumsOverviewSection() {
 
                 {/* Content */}
                 <div className="p-6 pt-0 space-y-5">
-                  <div className="p-4 bg-muted rounded-lg">
+                  <div className="p-4 bg-muted rounded-lg min-h-[200px]">
                     <p className="font-body text-xs font-semibold uppercase tracking-wider text-beige mb-2">
                       What it is
                     </p>
@@ -281,11 +436,21 @@ export function ForumsOverviewSection() {
                     </DialogDescription>
                   </DialogHeader>
 
+                  {content.leadParagraphs && (
+                    <div className="space-y-3 mb-8">
+                      {content.leadParagraphs.map((paragraph, i) => (
+                        <p key={i} className="body-small text-muted-foreground leading-relaxed">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+
                   <div className="space-y-8">
                     {/* What it is */}
                     <div>
                       <h4 className="text-sm font-semibold uppercase tracking-wider text-beige mb-3">
-                        What it is
+                        {content.sectionLabels?.whatItIs || "What it is"}
                       </h4>
                       <div className="space-y-3">
                         {content.whatItIs.map((paragraph, i) => (
@@ -299,67 +464,203 @@ export function ForumsOverviewSection() {
                     {/* When it typically applies */}
                     <div>
                       <h4 className="text-sm font-semibold uppercase tracking-wider text-beige mb-3">
-                        When it typically applies
+                        {content.sectionLabels?.whenApplies || "When it typically applies"}
                       </h4>
-                      <ul className="space-y-2">
-                        {content.whenApplies.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-beige mt-2 flex-shrink-0" />
-                            <span className="body-small text-muted-foreground">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <div className={content.whenAppliesCallout ? "bg-muted rounded-xl p-5" : undefined}>
+                        {content.whenAppliesIntro && (
+                          <p className="body-small text-muted-foreground mb-3">
+                            {content.whenAppliesIntro}
+                          </p>
+                        )}
+                        {content.whenApplies.length > 0 && (
+                          <ul className="space-y-2">
+                            {content.whenApplies.map((item, i) => (
+                              <li key={i} className="flex items-start gap-3">
+                                <span className="w-1.5 h-1.5 rounded-full bg-beige mt-2 flex-shrink-0" />
+                                <span className="body-small text-muted-foreground">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {content.whenAppliesSecondaryIntro && (
+                          <p className="body-small text-muted-foreground mt-4 mb-3">
+                            {content.whenAppliesSecondaryIntro}
+                          </p>
+                        )}
+                        {content.whenAppliesSecondary && (
+                          <ul className="space-y-2">
+                            {content.whenAppliesSecondary.map((item, i) => (
+                              <li key={i} className="flex items-start gap-3">
+                                <span className="w-1.5 h-1.5 rounded-full bg-beige mt-2 flex-shrink-0" />
+                                <span className="body-small text-muted-foreground">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                      {content.whenAppliesOutro && (
+                        <p className="body-small text-muted-foreground mt-4">
+                          {content.whenAppliesOutro}
+                        </p>
+                      )}
                     </div>
 
                     {/* Why parties choose it */}
                     <div>
                       <h4 className="text-sm font-semibold uppercase tracking-wider text-beige mb-3">
-                        Why parties choose it
+                        {content.sectionLabels?.whyChosen || "Why parties choose it"}
                       </h4>
-                      <ul className="space-y-2">
-                        {content.whyChosen.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-beige mt-2 flex-shrink-0" />
-                            <span className="body-small text-muted-foreground">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      {content.whyChosenIntro && (
+                        <p className="body-small text-muted-foreground mb-3">
+                          {content.whyChosenIntro}
+                        </p>
+                      )}
+                      {content.whyChosen.length > 0 && (
+                        <ul className="space-y-2">
+                          {content.whyChosen.map((item, i) => (
+                            <li key={i} className="flex items-start gap-3">
+                              <span className="w-1.5 h-1.5 rounded-full bg-beige mt-2 flex-shrink-0" />
+                              <span className="body-small text-muted-foreground">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {content.whyChosenParagraphs && (
+                        <div className="space-y-3 mt-4">
+                          {content.whyChosenParagraphs.map((paragraph, i) => (
+                            <p key={i} className="body-small text-muted-foreground leading-relaxed">
+                              {paragraph}
+                            </p>
+                          ))}
+                        </div>
+                      )}
                     </div>
 
-                    {/* Common pitfalls */}
-                    <div className="bg-muted rounded-xl p-5">
-                      <h4 className="text-sm font-semibold uppercase tracking-wider text-beige mb-3">
-                        Common pitfalls
-                      </h4>
-                      <ul className="space-y-2">
-                        {content.pitfalls.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-destructive mt-2 flex-shrink-0" />
-                            <span className="body-small text-muted-foreground">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    {(() => {
+                      const renderPitfalls = (
+                        <div className="bg-muted rounded-xl p-5">
+                          <h4 className="text-sm font-semibold uppercase tracking-wider text-beige mb-3">
+                            {content.sectionLabels?.pitfalls || "Common pitfalls"}
+                          </h4>
+                          {content.pitfallsParagraphs && (
+                            <div className="space-y-3">
+                              {content.pitfallsParagraphs.map((paragraph, i) => (
+                                <p key={i} className="body-small text-muted-foreground leading-relaxed">
+                                  {paragraph}
+                                </p>
+                              ))}
+                            </div>
+                          )}
+                          {content.pitfalls.length > 0 && (
+                            <ul className="space-y-2">
+                              {content.pitfalls.map((item, i) => (
+                                <li key={i} className="flex items-start gap-3">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-destructive mt-2 flex-shrink-0" />
+                                  <span className="body-small text-muted-foreground">{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                          {content.pitfallsOutro && (
+                            <p className="body-small text-muted-foreground mt-4">
+                              {content.pitfallsOutro}
+                            </p>
+                          )}
+                        </div>
+                      );
 
-                    {/* What we assess first */}
-                    <div>
-                      <h4 className="text-sm font-semibold uppercase tracking-wider text-beige mb-3">
-                        What we assess first
-                      </h4>
-                      <ul className="space-y-2">
-                        {content.whatWeAssess.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-beige mt-2 flex-shrink-0" />
-                            <span className="body-small text-muted-foreground">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                      const renderAdditionalBefore = content.additionalSection && content.additionalSectionPosition !== 'after' ? (
+                        <div className={content.additionalSectionCallout ? "bg-muted rounded-xl p-5" : undefined}>
+                          <h4 className="text-sm font-semibold uppercase tracking-wider text-beige mb-3">
+                            {content.additionalSection.title}
+                          </h4>
+                          <div className="space-y-3">
+                            {content.additionalSection.paragraphs.map((paragraph, i) => (
+                              <p key={i} className="body-small text-muted-foreground leading-relaxed">
+                                {paragraph}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null;
+
+                      const renderWhatWeAssess = (
+                        <div>
+                          <h4 className="text-sm font-semibold uppercase tracking-wider text-beige mb-3">
+                            {content.sectionLabels?.whatWeAssess || "What we assess first"}
+                          </h4>
+                          {content.whatWeAssessIntro && (
+                            <p className="body-small text-muted-foreground mb-3">
+                              {content.whatWeAssessIntro}
+                            </p>
+                          )}
+                          {content.whatWeAssessParagraphs && (
+                            <div className="space-y-3">
+                              {content.whatWeAssessParagraphs.map((paragraph, i) => (
+                                <p key={i} className="body-small text-muted-foreground leading-relaxed">
+                                  {paragraph}
+                                </p>
+                              ))}
+                            </div>
+                          )}
+                          {content.whatWeAssess.length > 0 && (
+                            <ul className="space-y-2">
+                              {content.whatWeAssess.map((item, i) => (
+                                <li key={i} className="flex items-start gap-3">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-beige mt-2 flex-shrink-0" />
+                                  <span className="body-small text-muted-foreground">{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                          {content.whatWeAssessOutro && (
+                            <p className="body-small text-muted-foreground mt-4">
+                              {content.whatWeAssessOutro}
+                            </p>
+                          )}
+                        </div>
+                      );
+
+                      const renderAdditionalAfter = content.additionalSection && content.additionalSectionPosition === 'after' ? (
+                        <div className={content.additionalSectionCallout ? "bg-muted rounded-xl p-5" : undefined}>
+                          <h4 className="text-sm font-semibold uppercase tracking-wider text-beige mb-3">
+                            {content.additionalSection.title}
+                          </h4>
+                          <div className="space-y-3">
+                            {content.additionalSection.paragraphs.map((paragraph, i) => (
+                              <p key={i} className="body-small text-muted-foreground leading-relaxed">
+                                {paragraph}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null;
+
+                      if (content.pitfallsAfterWhatWeAssess) {
+                        return (
+                          <>
+                            {renderAdditionalBefore}
+                            {renderWhatWeAssess}
+                            {renderPitfalls}
+                            {renderAdditionalAfter}
+                          </>
+                        );
+                      }
+
+                      return (
+                        <>
+                          {renderPitfalls}
+                          {renderAdditionalBefore}
+                          {renderWhatWeAssess}
+                          {renderAdditionalAfter}
+                        </>
+                      );
+                    })()}
 
                     {/* Disclaimer */}
                     <div className="pt-4 border-t border-border">
                       <p className="text-xs text-muted-foreground italic">
-                        This is general information and not legal advice. Applicability depends on the contract and facts.
+                        {content.disclaimer || "This is general information and not legal advice. Applicability depends on the contract and facts."}
                       </p>
                     </div>
                   </div>
@@ -372,3 +673,7 @@ export function ForumsOverviewSection() {
     </section>
   );
 }
+
+
+
+

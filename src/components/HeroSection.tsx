@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Shield, Target } from 'lucide-react';
 import { HeroBackground } from './icons/HeroBackground';
 import { UAEForumIllustration } from './icons/UAEForumIllustration';
+import vladimirImage from '@/assets/vladimir.png';
 
 const bullets = [
   {
@@ -27,14 +28,14 @@ export function HeroSection() {
   };
 
   return (
-    <section className="section-navy min-h-screen flex items-center pt-20 relative overflow-hidden">
+    <section className="section-navy min-h-screen flex flex-col pt-20 relative overflow-x-hidden">
       {/* Background Pattern */}
       <HeroBackground className="absolute inset-0 w-full h-full" />
       
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 md:pt-20 pb-0 relative z-10 w-full flex-1">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start lg:items-stretch h-full">
           {/* Left Column - Content */}
-          <div className="max-w-lg">
+          <div className="max-w-lg min-w-0 break-words pb-10 lg:pb-12">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-beige/10 border border-beige/25 mb-8">
               <span className="w-2 h-2 rounded-full bg-beige" />
@@ -66,20 +67,27 @@ export function HeroSection() {
             </ul>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" onClick={scrollToContact} className="group">
+            <div className="flex flex-col gap-4 w-full max-w-sm">
+              <Button variant="hero" size="xl" onClick={scrollToContact} className="group w-full">
                 Request an initial forum assessment
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="heroOutline" size="xl" onClick={scrollToContact}>
+              <Button variant="heroOutline" size="xl" onClick={scrollToContact} className="w-full">
                 Send a short summary of your dispute
               </Button>
             </div>
           </div>
 
           {/* Right Column - Clean Forum Illustration */}
-          <div className="hidden lg:flex items-center justify-center">
-            <UAEForumIllustration className="w-full max-w-md" />
+          <div className="relative flex flex-col items-center mt-10 lg:mt-0 h-full self-stretch">
+            <UAEForumIllustration className="w-full max-w-sm sm:max-w-md lg:max-w-md h-auto" />
+            <div className="mt-8 lg:mt-auto w-full flex justify-center">
+              <img
+                src={vladimirImage}
+                alt="Vladimir"
+                className="w-full max-w-[485px] sm:max-w-[560px] lg:max-w-[700px] xl:max-w-[800px] h-auto object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>
