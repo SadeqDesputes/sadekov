@@ -1,18 +1,20 @@
-import { CheckCircle2, Gavel, MessageSquareText, Globe } from 'lucide-react';
+import { CheckCircle2, Gavel, Globe, FileText } from 'lucide-react';
 import { ProcessFlow } from './icons/ProcessFlow';
 
 const services = [
   {
     icon: Gavel,
-    text: "Jurisdiction and forum assessment (DIFC / ADGM / arbitration)",
-  },
-  {
-    icon: MessageSquareText,
-    text: "Strategic advice before filing a claim or responding to one",
+    text: "Jurisdiction and forum assessment (DIFC / ADGM / arbitration) and strategic advice",
   },
   {
     icon: Globe,
     text: "Cross-border enforceability planning and dispute structuring",
+  },
+  {
+    icon: FileText,
+    title: "Case Assessment Product",
+    body: "A report-based package including a review of your legal position, options, risks, and whether pursuing a claim is commercially sensible.",
+    highlight: true,
   },
 ];
 
@@ -28,7 +30,7 @@ export function HowWeHelpSection() {
           <ProcessFlow />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-16 items-start lg:items-stretch">
           {/* Left - Content */}
           <div>
             <span className="text-sm font-semibold text-beige uppercase tracking-widest mb-4 block">
@@ -50,19 +52,26 @@ export function HowWeHelpSection() {
           </div>
 
           {/* Right - Services */}
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4 h-full">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="group flex items-start gap-5 p-6 bg-background border border-border rounded-xl hover:shadow-lg hover:border-beige/30 transition-all duration-300"
+                className={`group flex items-center gap-5 p-6 border border-border rounded-xl hover:shadow-lg hover:border-beige/30 transition-all duration-300 flex-1 ${service.highlight ? 'bg-beige/10' : 'bg-background'}`}
               >
                 <div className="w-12 h-12 rounded-xl bg-beige/10 border border-beige/20 flex items-center justify-center flex-shrink-0 group-hover:bg-beige/20 transition-colors">
                   <service.icon className="w-6 h-6 text-beige" />
                 </div>
-                <div className="flex-1 pt-1">
+                <div className="flex-1">
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-beige flex-shrink-0 mt-0.5" />
-                    <span className="body-base text-foreground font-medium">{service.text}</span>
+                    {service.title ? (
+                      <div className="flex flex-col gap-1">
+                        <span className="body-base text-foreground font-medium">{service.title}</span>
+                        <span className="body-small text-muted-foreground">{service.body}</span>
+                      </div>
+                    ) : (
+                      <span className="body-base text-foreground font-medium">{service.text}</span>
+                    )}
                   </div>
                 </div>
               </div>

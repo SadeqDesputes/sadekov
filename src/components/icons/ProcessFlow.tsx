@@ -3,23 +3,23 @@ import { Search, MessageSquare, FileCheck, ArrowRight } from 'lucide-react';
 const steps = [
   {
     icon: Search,
-    title: "Assess",
-    subtitle: "Review clause & facts"
+    title: "Assessment",
+    subtitle: "Check clause & facts"
   },
   {
     icon: MessageSquare,
-    title: "Advise",
-    subtitle: "Explain your options"
+    title: "Advice",
+    subtitle: "Map your options"
   },
   {
     icon: FileCheck,
-    title: "Structure",
-    subtitle: "Plan the approach"
+    title: "Proceedings",
+    subtitle: "File in the right forum"
   },
   {
     icon: ArrowRight,
-    title: "Proceed",
-    subtitle: "Act with clarity in the right forum"
+    title: "Enforcement",
+    subtitle: "Enforce the outcome"
   }
 ];
 

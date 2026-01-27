@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import { ArrowRight, CheckCircle2, Shield, Send, Clock } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Shield, Send, Clock, MessageCircle } from 'lucide-react';
 import { toast } from 'sonner';
 
 const forumOptions = [
@@ -70,25 +70,35 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="section-navy py-24 md:py-32 relative overflow-hidden">
+    <section id="contact" className="section-navy py-24 md:py-32 relative overflow-hidden" aria-label="Request assessment" >
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-0 w-96 h-96 bg-beige/5 rounded-full blur-3xl -translate-y-1/2" />
       </div>
       
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+      <div id="request-assessment" className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-start lg:items-stretch">
           {/* Left - CTA Content */}
-          <div>
-            <span className="text-sm font-semibold text-beige uppercase tracking-widest mb-4 block">
-              Get Started
-            </span>
-            <h2 className="heading-section text-primary-foreground mb-6">
-              Before relying on a UAE forum, make sure it actually applies.
-            </h2>
-            <p className="body-large text-primary-foreground/80 mb-10">
-              If you are in a dispute, facing one, or uncertain which forum governs your case, we can review the clause and the key facts and explain the options clearly.
-            </p>
+          <div className="flex flex-col h-full">
+            <div>
+              <span className="text-sm font-semibold text-beige uppercase tracking-widest mb-4 block">
+                Get Started
+              </span>
+              <h2 className="heading-section text-primary-foreground mb-6">
+                Before relying on a UAE forum, make sure it actually applies.
+              </h2>
+
+              <div className="mb-6">
+                <p className="text-beige uppercase font-heading text-2xl md:text-3xl tracking-widest leading-tight">
+                  <span className="block">SADEQ DISPUTES</span>
+                  <span className="block">NOT JUST TO FIGHT. TO PREVAIL!</span>
+                </p>
+              </div>
+
+              <p className="body-large text-primary-foreground/80 mb-6">
+                If you are in a dispute, facing one, or uncertain which forum governs your case, we can review the clause and the key facts and explain the options clearly. You can also request a private consultation with our experienced team. We advise on dispute strategy and forum selection across UAE free zones.
+              </p>
+            </div>
             
             {/* Trust indicators */}
             <div className="space-y-4">
@@ -108,6 +118,20 @@ export function ContactSection() {
                   Initial information helps us assess the next step
                 </p>
               </div>
+            </div>
+
+            <div className="mt-10 lg:mt-auto lg:mb-8 w-full lg:px-8">
+              <Button
+                asChild
+                variant="hero"
+                size="xl"
+                className="w-full group flex items-center justify-center gap-3"
+              >
+                <a href="https://sadekov.ee/en/online-booking">
+                  <MessageCircle className="w-5 h-5 text-primary" />
+                  Online consultation with our legal team
+                </a>
+              </Button>
             </div>
           </div>
 

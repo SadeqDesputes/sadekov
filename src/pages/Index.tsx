@@ -4,6 +4,7 @@ import { WhyForumMattersSection } from '@/components/WhyForumMattersSection';
 import { ForumsOverviewSection } from '@/components/ForumsOverviewSection';
 import { MisconceptionsSection } from '@/components/MisconceptionsSection';
 import { HowWeHelpSection } from '@/components/HowWeHelpSection';
+import { AboutSadeqDisputesSection } from '@/components/AboutSadeqDisputesSection';
 import { ContactSection } from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
 
@@ -17,6 +18,7 @@ const Index = () => {
         <ForumsOverviewSection />
         <MisconceptionsSection />
         <HowWeHelpSection />
+        <AboutSadeqDisputesSection />
         <ContactSection />
       </main>
       <Footer />

@@ -46,7 +46,7 @@ export function HeroSection() {
 
             {/* Headline */}
             <h1 className="heading-hero text-primary-foreground mb-6 leading-tight">
-              Before you file or respond, confirm the right forum actually applies!
+              UAE Free Zone dispute? Start by confirming the forum.
             </h1>
 
             {/* Subheading */}
