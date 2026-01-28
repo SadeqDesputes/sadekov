@@ -76,10 +76,10 @@ export function ContactSection() {
         <div className="absolute top-1/2 left-0 w-96 h-96 bg-beige/5 rounded-full blur-3xl -translate-y-1/2" />
       </div>
       
-      <div id="request-assessment" className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div id="request-assessment" className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 overflow-x-hidden">
         <div className="grid lg:grid-cols-2 gap-16 items-start lg:items-stretch">
           {/* Left - CTA Content */}
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full min-w-0">
             <div>
               <span className="text-sm font-semibold text-beige uppercase tracking-widest mb-4 block">
                 Get Started
@@ -95,7 +95,7 @@ export function ContactSection() {
                 </p>
               </div>
 
-              <p className="body-large text-primary-foreground/80 mb-6">
+              <p className="body-large text-primary-foreground/80 mb-6 break-words">
                 If you are in a dispute, facing one, or uncertain which forum governs your case, we can review the clause and the key facts and explain the options clearly. You can also request a private consultation with our experienced team. We advise on dispute strategy and forum selection across UAE free zones.
               </p>
             </div>
@@ -125,18 +125,22 @@ export function ContactSection() {
                 asChild
                 variant="hero"
                 size="xl"
-                className="w-full group flex items-center justify-center gap-3"
+                className="w-full group flex items-center justify-center gap-3 text-center leading-tight whitespace-normal break-words sm:whitespace-nowrap"
               >
                 <a href="https://sadekov.ee/en/online-booking">
-                  <MessageCircle className="w-5 h-5 text-primary" />
-                  Online consultation with our legal team
+                  <span className="flex items-center justify-center gap-3 w-full flex-wrap">
+                    <MessageCircle className="w-5 h-5 text-primary flex-shrink-0 hidden sm:inline-flex" />
+                    <span className="block min-w-0 text-center break-words">
+                      Online consultation with our legal team
+                    </span>
+                  </span>
                 </a>
               </Button>
             </div>
           </div>
 
           {/* Right - Form */}
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 min-w-0">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 rounded-lg bg-beige/20 flex items-center justify-center">
                 <Send className="w-5 h-5 text-beige" />
@@ -244,9 +248,18 @@ export function ContactSection() {
                 </Label>
               </div>
 
-              <Button variant="hero" size="xl" type="submit" className="w-full group">
-                Request an initial forum assessment
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <Button
+                variant="hero"
+                size="xl"
+                type="submit"
+                className="w-full group text-center leading-tight whitespace-normal break-words sm:whitespace-nowrap"
+              >
+                <span className="flex items-center justify-center gap-2 w-full flex-wrap">
+                  <span className="block min-w-0 text-center break-words">
+                    Request an initial forum assessment
+                  </span>
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 flex-shrink-0 hidden sm:inline-flex" />
+                </span>
               </Button>
             </form>
           </div>

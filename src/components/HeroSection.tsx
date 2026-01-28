@@ -68,11 +68,21 @@ export function HeroSection() {
 
             {/* CTAs */}
             <div className="flex flex-col gap-4 w-full max-w-sm">
-              <Button variant="hero" size="xl" onClick={scrollToContact} className="group w-full">
+              <Button
+                variant="hero"
+                size="xl"
+                onClick={scrollToContact}
+                className="group w-full text-center whitespace-normal break-words leading-tight sm:whitespace-nowrap"
+              >
                 Request an initial forum assessment
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 hidden sm:inline-flex" />
               </Button>
-              <Button variant="heroOutline" size="xl" onClick={scrollToContact} className="w-full">
+              <Button
+                variant="heroOutline"
+                size="xl"
+                onClick={scrollToContact}
+                className="w-full whitespace-normal break-words text-center leading-tight sm:whitespace-nowrap sm:break-normal"
+              >
                 Send a short summary of your dispute
               </Button>
             </div>
