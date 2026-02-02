@@ -98,7 +98,7 @@ const modalContent: Record<ForumKey, ForumModalContent> = {
       "We help clients verify whether DIFC Courts have jurisdiction, identify potential procedural risks, and structure a legally sound strategy before any claim is filed or defended. This early clarity allows our clients to avoid costly mistakes and proceed with confidence in complex DIFC-related disputes."
     ],
     whatItIs: [
-      "The DIFC is a financial free zone in Dubai with its own independent common-law judicial system, separate from the UAEâ€™s onshore civil courts. DIFC Courts operate in English and are designed to meet the expectations of international businesses and investors."
+      "The DIFC is a financial free zone in Dubai with its own independent common-law judicial system, separate from the UAE’s onshore civil  courts. DIFC Courts operate in English and are designed to meet the expectations of international businesses and investors."
     ],
     whenAppliesIntro: "The DIFC Courts consist of:",
     whenApplies: [
@@ -144,7 +144,7 @@ const modalContent: Record<ForumKey, ForumModalContent> = {
       pitfalls: "Legal Representation",
       whatWeAssess: "Procedural Flexibility"
     },
-    disclaimer: "Sadekov Law Office is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters under Estonian and EU law."
+    disclaimer: "Sadekov Law Firm is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters under Estonian and EU law."
   },
   adgm: {
     title: "ADGM Courts",
@@ -203,7 +203,7 @@ const modalContent: Record<ForumKey, ForumModalContent> = {
       pitfalls: "ADGM Arbitration Framework",
       whatWeAssess: "Recognition and Enforcement Advantages"
     },
-    disclaimer: "Sadekov Law Office is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters."
+    disclaimer: "Sadekov Law Firm is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters."
   },
   arbitration_diac: {
     title: "Arbitration (DIAC)",
@@ -267,7 +267,7 @@ const modalContent: Record<ForumKey, ForumModalContent> = {
       pitfalls: "Role of DIAC",
       whatWeAssess: "Legal Representation"
     },
-    disclaimer: "Sadekov Law Office is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters under Estonian and EU law."
+    disclaimer: "Sadekov Law Firm is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters under Estonian and EU law."
   },
   arbitration_icc: {
     title: "Arbitration (ICC)",
@@ -321,7 +321,7 @@ const modalContent: Record<ForumKey, ForumModalContent> = {
       pitfalls: "Legal Representation",
       whatWeAssess: "ICC Arbitration Rules"
     },
-    disclaimer: "Sadekov Law Office is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters under Estonian and EU law."
+    disclaimer: "Sadekov Law Firm is an independent Estonian law firm based in Tallinn, with more than 25 years of experience and membership in the Estonian Bar Association since 2006. Our core services include criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law, alongside international legal services in International Criminal Defence & Cross-Border Legal Protection, International Arbitration & Cross-Border Commercial Disputes, Strategic Legal Defence in Sanctions, Tax, and Cross-Border Investigations, and Personal Legal Advisor for HNWI and VHNWI. We represent clients across Europe and the MENA region in complex criminal, private, and cross-border legal matters under Estonian and EU law."
   }
 };
 
@@ -334,10 +334,10 @@ export function ForumsOverviewSection() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="text-sm font-semibold text-beige uppercase tracking-widest mb-4 block">
-            Forum Overview
+            Jurisdiction Overview
           </span>
           <h2 className="heading-section text-foreground">
-            A practical overview of the main forums
+            A practical overview of the main jurisdictions
           </h2>
         </div>
 
@@ -673,6 +673,7 @@ export function ForumsOverviewSection() {
     </section>
   );
 }
+
 
 
 

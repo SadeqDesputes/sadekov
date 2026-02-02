@@ -91,7 +91,7 @@ export function ContactSection() {
               <div className="mb-6">
                 <p className="text-beige uppercase font-heading text-2xl md:text-3xl tracking-widest leading-tight">
                   <span className="block">SADEQ DISPUTES</span>
-                  <span className="block">NOT JUST TO FIGHT. TO PREVAIL!</span>
+                  <span className="block">NOT JUST TO Contest. TO PREVAIL!</span>
                 </p>
               </div>
 
@@ -252,11 +252,11 @@ export function ContactSection() {
                 variant="hero"
                 size="xl"
                 type="submit"
-                className="w-full group text-center leading-tight whitespace-normal break-words sm:whitespace-nowrap"
+                className="w-full group text-center leading-snug whitespace-normal break-words h-auto py-3 sm:h-14 sm:py-0 sm:leading-normal sm:whitespace-nowrap"
               >
                 <span className="flex items-center justify-center gap-2 w-full flex-wrap">
-                  <span className="block min-w-0 text-center break-words">
-                    Request an initial forum assessment
+                  <span className="block min-w-0 text-center break-words overflow-hidden [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] sm:[display:block] sm:[-webkit-line-clamp:unset] sm:[-webkit-box-orient:unset]">
+                    Request a Jurisdiction Assessment
                   </span>
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 flex-shrink-0 hidden sm:inline-flex" />
                 </span>

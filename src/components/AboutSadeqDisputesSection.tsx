@@ -1,4 +1,4 @@
-import freezoneImg from "@/assets/freezone.jpg";
+﻿import freezoneImg from "@/assets/freezone.jpg";
 import { Button } from "@/components/ui/button";
 
 export function AboutSadeqDisputesSection() {
@@ -26,7 +26,7 @@ export function AboutSadeqDisputesSection() {
             </h2>
             <div className="space-y-6">
               <p className="body-large text-muted-foreground">
-                Sadekov Law Office is an independent Estonian law firm based in Tallinn, with over 25 years of experience and membership in the Estonian Bar Association since 2006. Our core practice covers criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law. We also advise on complex cross-border matters, including international criminal defence and legal protection, international arbitration and commercial disputes, sanctions and tax-related investigations, and personal legal advisory for HNWI and VHNWI clients.
+                Sadekov Law Firm is an independent Estonian law firm based in Tallinn, with over 25 years of experience and membership in the Estonian Bar Association since 2006. Our core practice covers criminal law, law of obligations, commercial law, family law, enforcement proceedings, and labour law. We also advise on complex cross-border matters, including international criminal defence and legal protection, international arbitration and commercial disputes, sanctions and tax-related investigations, and personal legal advisory for HNWI and VHNWI clients.
               </p>
               <p className="body-large text-muted-foreground">
                 In the UAE Free Zones, we operate under the <span className="font-semibold text-foreground">Sadeq Disputes</span> brand, focusing on disputes connected with DIFC, ADGM, and arbitration frameworks commonly used in the UAE. We represent clients across Europe and the MENA region in sensitive criminal, private, and cross-border cases under Estonian and EU law.
@@ -52,3 +52,4 @@ export function AboutSadeqDisputesSection() {
     </section>
   );
 }
+

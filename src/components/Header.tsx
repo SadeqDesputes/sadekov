@@ -6,7 +6,7 @@ const navLinks = [{
   label: 'Why It Matters',
   href: '#why-forum-matters'
 }, {
-  label: 'Forums',
+  label: 'Jurisdiction',
   href: '#forums-overview'
 }, {
   label: 'Misconceptions',
@@ -42,7 +42,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center">
-          <img alt="Sadekov Law Firm" className="h-10 md:h-12 w-auto" src={logo} />
+          <img alt="Sadekov Law Firm" className="h-[3.8rem] w-auto" src={logo} />
         </a>
 
         {/* Desktop Navigation */}

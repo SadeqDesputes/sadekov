@@ -38,7 +38,7 @@ export function WhyForumMattersSection() {
               Understanding the Stakes
             </span>
             <h2 className="heading-section text-foreground mb-8">
-              Why forum choice matters
+              Why jurisdiction matters
             </h2>
             <p className="body-large text-muted-foreground">
               In UAE-connected disputes, jurisdiction and arbitration are legal questions, not formalities. Choosing the wrong forum can delay outcomes, increase costs, and weaken your position—especially when enforcement across borders is needed.

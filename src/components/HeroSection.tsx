@@ -46,12 +46,12 @@ export function HeroSection() {
 
             {/* Headline */}
             <h1 className="heading-hero text-primary-foreground mb-6 leading-tight">
-              UAE Free Zone dispute? Start by confirming the forum.
+              UAE Free Zone dispute? Confirm jurisdiction before you act.
             </h1>
 
             {/* Subheading */}
             <p className="body-large text-primary-foreground/75 mb-10 leading-relaxed">
-              DIFC Courts, ADGM Courts, or arbitration may all be relevant in the UAE, but applicability is never automatic. We help you identify the correct forum and the practical implications before you take action.
+              DIFC Courts, ADGM Courts, or arbitration may all be relevant in the UAE, but applicability is never automatic. We help you confirm jurisdiction, identify the right forum, and understand the practical implications before you take action.
             </p>
 
             {/* Bullets with Icons */}
@@ -74,7 +74,7 @@ export function HeroSection() {
                 onClick={scrollToContact}
                 className="group w-full text-center whitespace-normal break-words leading-tight sm:whitespace-nowrap"
               >
-                Request an initial forum assessment
+                Request a Jurisdiction Assessment
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 hidden sm:inline-flex" />
               </Button>
               <Button
